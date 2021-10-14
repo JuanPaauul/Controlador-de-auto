@@ -22,19 +22,3 @@ export function sumNumbers(listString){
   });
   return suma;
 }
-function sumNumbersGuion(listString){
-  var numeros = listOfNumbers(listString,"-"), suma = 0;
-    numeros.forEach (function(numero){
-      if(numero<1000)
-        suma += numero;
-    });
-  return suma;
-}
-function sumNumbersComa(listString){
-  var numeros = listOfNumbers(listString,","), suma = 0;
-    numeros.forEach (function(numero){
-      if(numero<1000)
-        suma += numero;
-    });
-  return suma;
-}

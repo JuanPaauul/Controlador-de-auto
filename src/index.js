@@ -1,15 +1,18 @@
-import sumar from "./App";
+import {moveCarAlong} from "./Autito";
 
-const first = document.querySelector("#first-number");
-const second = document.querySelector("#second-number");
-const form = document.querySelector("#sumar-form");
-const div = document.querySelector("#resultado-div");
+const comands = document.querySelector("#comands-input");
+const form = document.querySelector("#comand-form");
+const initialPositionText = document.querySelector("#initial-position");
+const comandsSentText = document.querySelector("#comands-sent");
+const finalPositionText = document.querySelector("#final-position");
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
-
-  const firstNumber = Number.parseInt(first.value);
-  const secondNumber = Number.parseInt(second.value);
-
-  div.innerHTML = "<p>" + sumar(firstNumber, secondNumber) + "</p>";
+  var comandos = comands.value;
+  //----//
+  var posicionInicial = moveCarAlong(comandos);
+  alert(comandos);
+  finalPositionText.innerHTML = "<p>" + posicionInicial[0] + "</p>";
+  initialPositionText.innerHTML = "<p>" + posicionInicial[1] + "</p>";
+  comandsSentText.innerHTML = "<p>" + posicionInicial[2] + "</p>";
 });

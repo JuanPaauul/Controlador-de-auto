@@ -64,6 +64,7 @@ export function moveCarAlong(command){
   var coordenates = command.split("/")[1].split(direction)[0];
   var movements = command.split("/")[2];
   let listAxis = [Number(coordenates.split(",")[0]),Number(coordenates.split(",")[1])]
+  let listInitialPosition = listAxis;
   for (var i = 0; movements[i]!=null;i++){
     if(movements[i] != "A"){
       direction = adjustDirection(direction,movements[i]);
@@ -71,5 +72,7 @@ export function moveCarAlong(command){
       listAxis = moveCar(listAxis[0], listAxis[1], direction,listLimit);
     }
   }
-  return (""+listAxis[0]).toString()+","+ (""+listAxis[1]).toString();
+  var lastposition = (""+listAxis[0]).toString()+","+ (""+listAxis[1]).toString();
+  var listResult = [lastposition,listInitialPosition,movements];
+  return listResult;
 }

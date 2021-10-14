@@ -1,15 +1,27 @@
-<html>
-  <body>
-    <h1>Sumador</h1>
-    <form id="sumar-form">
-      <label for="first-number">First Number:</label>
-      <input type="number" id="first-number" />
-      <label for="second-number">Second Number:</label>
-      <input type="number" id="second-number" />
-      <input type="submit" value="Sumar" />
-    </form>
-    <div id="resultado-div"></div>
-
-    <script type="module" src="./src/index.js"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autito</title>
+</head>
+<body>
+  <form id="comand-form">
+    <h1>Comandos</h1>
+    <textarea id="comands-input" cols="30" rows="10"></textarea>
+    <input type="submit" value="Ejecutar"/>
+  </form>
+  <div class="information">
+    <label for="initial-position">Posicion Incial: </label>
+    <div id="initial-position"></div>
+    <br>
+    <label for="comands-sent">Comandos: </label>
+    <div id="comands-sent"></div>
+    <br>
+    <label for="final-position">Posicion final: </label>
+    <div id="final-position"></div>
+  </div>
+  <script src="./src/index.js"></script>
+</body>
 </html>
