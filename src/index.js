@@ -9,9 +9,7 @@ const finalPositionText = document.querySelector("#final-position");
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   var comandos = comands.value;
-  //----//
   var posicionInicial = moveCarAlong(comandos);
-  alert(comandos);
   finalPositionText.innerHTML = "<p>" + posicionInicial[0] + "</p>";
   initialPositionText.innerHTML = "<p>" + posicionInicial[1] + "</p>";
   comandsSentText.innerHTML = "<p>" + posicionInicial[2] + "</p>";
