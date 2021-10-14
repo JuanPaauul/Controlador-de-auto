@@ -11,19 +11,25 @@ describe("Autito ", () => {
     expect(moveCar("1,3/A")).toEqual(2,3);
   });Debido al formato UTF-16 de .lenght hay un problema al calcula una sola letra ya que esta devuelve 2 en lugar de 1*/
   it("Deberia retornar la posicion del autito dando dos paso adelante (por defecto apunta la Este)", () => {
-    expect(moveCarAlong("1,3 E/AA")).toEqual("3,3");
+    expect(moveCarAlong("5,5/1,3E/AA")).toEqual("3,3");
   });
   it("Deberia retornar la posicion del autito dando tres paso adelante (por defecto apunta la Este)", () => {
-    expect(moveCarAlong("1,3 E/AAA")).toEqual("4,3");
+    expect(moveCarAlong("5,5/1,3E/AAA")).toEqual("4,3");
   });
   it("Deberia retornar la posicion del autito dando tres paso adelante hacia una direccion establecida", () => {
-    expect(moveCarAlong("1,3 S/AAA")).toEqual("1,0");
+    expect(moveCarAlong("5,5/1,3S/AAA")).toEqual("1,0");
   });
   it("Deberia retornar la posicion del autito ahora incluyendo el paso a la izquierda", () => {
-    expect(moveCarAlong("1,3 S/AIA")).toEqual("2,2");
+    expect(moveCarAlong("5,5/1,3S/AIA")).toEqual("2,2");
   });
-  it("Deberia retornar la posicion del autito ahora incluyendo el paso a la izquierda", () => {
-    expect(moveCarAlong("1,3 S/ADA")).toEqual("0,2");
+  it("Deberia retornar la posicion del autito ahora incluyendo el paso a la derecha", () => {
+    expect(moveCarAlong("5,5/1,3S/ADA")).toEqual("0,2");
+  });
+  it("Deberia retornar la posicion del autito ahora incluyendo el paso a la derecha", () => {
+    expect(moveCarAlong("5,5/1,3S/ADAIADAI")).toEqual("0,1");
+  });
+  it("Deberia retornar la posicion del autito ahora incluyendo el paso a la derecha", () => {
+    expect(moveCarAlong("5,5/1,3S/ADAIADAI")).toEqual("0,1");
   });
 });
 function stringLenght(str){
@@ -35,9 +41,6 @@ function stringLenght(str){
 }
 function getPosition(position){
   return position
-}
-function getKeyByValue(object, value) {
-  return Object.keys(object).find(key => object[key] === value);
 }
 function adjustDirection(currentDirection, newDirection){
   var cardinalPoints = {
@@ -63,39 +66,44 @@ function adjustDirection(currentDirection, newDirection){
     directionUpdated = 0;
   return cardinalPointsInverted[directionUpdated];
 }
-function moveCar(xAxis, yAxis, direction, movement = 1){
+function moveCar(xAxis, yAxis, direction, listLimit = [5,5]){
   switch (direction){
     case "O":
-      xAxis = xAxis-movement;
+      if(xAxis != 0)
+        xAxis = xAxis-1;
       break;
     case "E":
-      xAxis = xAxis+movement;
+      if(listLimit[0] != xAxis)
+        xAxis = xAxis+1;
       break;
     case "N":
-      yAxis = yAxis+movement;
+      if(listLimit[1] != yAxis)
+        yAxis = yAxis+1;
       break;
     case "S":
-      yAxis = yAxis-movement;
+      if(yAxis != 0)
+        yAxis = yAxis-1;
       break;
     default:
       return 0;
       break;
   }
-  var listAxis = [xAxis,yAxis]
+  var listAxis = [xAxis,yAxis];
   return listAxis;
 }
 function moveCarAlong(command){
-  var direction = command.split("/")[0][stringLenght(command.split("/")[0])-1];
-  var coordenates = command.split("/")[0].split(direction)[0];
-  var movements = command.split("/")[1];
+  var limit = command.split("/")[0];
+  var listLimit = [Number(limit.split(",")[0]),Number(limit.split(",")[1])];
+  var direction = command.split("/")[1][stringLenght(command.split("/")[1])-1];
+  var coordenates = command.split("/")[1].split(direction)[0];
+  var movements = command.split("/")[2];
   let listAxis = [Number(coordenates.split(",")[0]),Number(coordenates.split(",")[1])]
   for (var i = 0; movements[i]!=null;i++){
     if(movements[i] != "A"){
       direction = adjustDirection(direction,movements[i]);
     }else{
-      listAxis = moveCar(listAxis[0], listAxis[1], direction);
+      listAxis = moveCar(listAxis[0], listAxis[1], direction,listLimit);
     }
   }
-  
   return (""+listAxis[0]).toString()+","+ (""+listAxis[1]).toString();
 }
