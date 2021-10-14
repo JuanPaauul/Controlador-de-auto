@@ -1,0 +1,22 @@
+<<<<<<< HEAD
+1. Recibir un numero en formato string y convertirlo a int.
+2. Recibir dos numeros en formato string y poder contar esos numeros de acuerdo a las comas.
+3. Recibir dos numeros en formato string separados por una coma para luego sumarlos.
+4. Recibir una lista de numeros separados por comas para luego sumarlos
+5. Recibir una lista de numeros separados por guiones retornar la suma de los numeros
+6. Recibir una lista de numeros separados por un delimitador de un solo caracter encerrado entre corchetes y retornar la suma de ellos.
+7. Recibir la suma de n numeros en los cuales se ignoren los numeros mayores a 1000.
+8. Recibir una lista de dos numeros separados por un delimitador de cualquier cantidad de caracteres y retornar la suma
+9. Recibir una lista de numeros separados por un delimitador de cualquier cantidad de caracteres y retornar la suma de ellos.
+=======
+1. Recibir un numero en formato string y convertirlo a int.
+2. Recibir dos numeros en formato string y poder contar esos numeros de acuerdo a las comas.
+3. Recibir dos numeros en formato string separados por una coma para luego sumarlos.
+4. Recibir una lista de numeros separados por comas para luego sumarlos
+5. Recibir una lista de numeros separados por guiones retornar la suma de los numeros
+6. Recibir una lista de numeros separados por un delimitador de un solo caracter encerrado entre corchetes y retornar la suma de ellos.
+7. Recibir la suma de n numeros en los cuales se ignoren los numeros mayores a 1000.
+8. Recibir una lista de dos numeros separados por un delimitador de cualquier cantidad de caracteres y retornar la suma
+9. Recibir una lista de numeros separados por un delimitador de cualquier cantidad de caracteres y retornar la suma de ellos.
+>>>>>>> 1831833dd51ac29ff30c48e9216dde238d30bbaf
+10. Recibir una lista de 2 numeros separados por mas de un delimitador y retornar la suma de ellos.
