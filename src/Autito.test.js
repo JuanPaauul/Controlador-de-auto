@@ -19,6 +19,12 @@ describe("Autito ", () => {
   it("Deberia retornar la posicion del autito dando tres paso adelante hacia una direccion establecida", () => {
     expect(moveCarAlong("1,3 S/AAA")).toEqual("1,0");
   });
+  it("Deberia retornar la posicion del autito ahora incluyendo el paso a la izquierda", () => {
+    expect(moveCarAlong("1,3 S/AIA")).toEqual("2,2");
+  });
+  it("Deberia retornar la posicion del autito ahora incluyendo el paso a la izquierda", () => {
+    expect(moveCarAlong("1,3 S/ADA")).toEqual("0,2");
+  });
 });
 function stringLenght(str){
   var counter = 0;
@@ -30,7 +36,34 @@ function stringLenght(str){
 function getPosition(position){
   return position
 }
-function moveCar(xAxis, yAxis, direction, movement){
+function getKeyByValue(object, value) {
+  return Object.keys(object).find(key => object[key] === value);
+}
+function adjustDirection(currentDirection, newDirection){
+  var cardinalPoints = {
+    "O":180,
+    "E":0, 
+    "N":90, 
+    "S":270
+  };
+  var cardinalPointsInverted = {
+    180:"O",
+    0:"E", 
+    90:"N", 
+    270:"S"
+  };
+  var directionAngles = {
+    "D":-90,
+    "I":90
+  };
+  var directionUpdated = cardinalPoints[currentDirection] + directionAngles[newDirection];
+  if (directionUpdated<0)
+    directionUpdated += 360;
+  if(directionUpdated == 360)
+    directionUpdated = 0;
+  return cardinalPointsInverted[directionUpdated];
+}
+function moveCar(xAxis, yAxis, direction, movement = 1){
   switch (direction){
     case "O":
       xAxis = xAxis-movement;
@@ -48,14 +81,21 @@ function moveCar(xAxis, yAxis, direction, movement){
       return 0;
       break;
   }
-  return xAxis.toString()+","+yAxis.toString();
+  var listAxis = [xAxis,yAxis]
+  return listAxis;
 }
 function moveCarAlong(command){
-  var coordenates = command.split("/")[0].split(" ")[0];
-  var direction = command.split("/")[0].split(" ")[1];
+  var direction = command.split("/")[0][stringLenght(command.split("/")[0])-1];
+  var coordenates = command.split("/")[0].split(direction)[0];
   var movements = command.split("/")[1];
-  var xAxis = Number(coordenates.split(",")[0]);
-  var yAxis = Number(coordenates.split(",")[1]);
-  coordenates= moveCar(xAxis, yAxis, direction, stringLenght(movements));
-  return coordenates;
+  let listAxis = [Number(coordenates.split(",")[0]),Number(coordenates.split(",")[1])]
+  for (var i = 0; movements[i]!=null;i++){
+    if(movements[i] != "A"){
+      direction = adjustDirection(direction,movements[i]);
+    }else{
+      listAxis = moveCar(listAxis[0], listAxis[1], direction);
+    }
+  }
+  
+  return (""+listAxis[0]).toString()+","+ (""+listAxis[1]).toString();
 }
